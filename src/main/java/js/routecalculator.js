@@ -29,9 +29,11 @@ function searchNearby(item, index){
 function nearbySearchCallback(results, status){
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         console.log("Generation bus stop location" + results[0].geometry.location);
-        var lat = results[0].geometry.location.lat();
-        var lng = results[0].geometry.location.lng();
-        var locationPt = new google.maps.LatLng(lat, lng); //TODO: cannot create this object properly
+
+        var locationPt = {
+            lat: results[0].geometry.location.lat(),
+            lng: results[0].geometry.location.lng()
+        };
 
         busStops.push({
             location: locationPt,
@@ -43,7 +45,7 @@ function nearbySearchCallback(results, status){
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     var originAndDestination = "Jana Roso³a 10, Warszawa";
-
+    console.log(busStops);
     directionsService.route({
         origin: originAndDestination,
         destination: originAndDestination,
