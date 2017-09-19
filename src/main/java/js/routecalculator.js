@@ -49,7 +49,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     directionsService.route({
         origin: originAndDestination,
         destination: originAndDestination,
-        waypoints: busStops,
+        waypoints: busStops,     //todo: won't work with given array
         optimizeWaypoints: true,
         travelMode: 'DRIVING'
     }, function(response, status) {
