@@ -4,53 +4,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Waypoints in directions</title>
-    <style>
-        #right-panel {
-            font-family: 'Roboto','sans-serif';
-            line-height: 30px;
-            padding-left: 10px;
-        }
-
-        #right-panel select, #right-panel input {
-            font-size: 15px;
-        }
-
-        #right-panel select {
-            width: 100%;
-        }
-
-        #right-panel i {
-            font-size: 12px;
-        }
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        #map {
-            height: 100%;
-            float: left;
-            width: 70%;
-        }
-        #right-panel {
-            margin: 20px;
-            border-width: 2px;
-            width: 20%;
-            height: 400px;
-            float: left;
-            text-align: left;
-            padding-top: 0;
-        }
-
-        #right-panel li {
-            list-style-type: none;
-
-        }
-
-        #right-panel ul {
-            padding-left: 0;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
 <div id="map"></div>
@@ -75,7 +29,7 @@
     </div>
 </div>
 <script>
-    //todo: separate script, html and css
+    //todo: move js to separate files
     var waypts = [];
 
     window.onload = function() {
