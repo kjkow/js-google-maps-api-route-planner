@@ -4,6 +4,7 @@
 var waypts = [];
 
 var busStops = [];
+
 function generateBusStops(){
     console.log("Start iterating through waypoints... " + waypts);
     //waypts.forEach(searchNearby); //todo: maybe this will work
@@ -17,18 +18,23 @@ function generateBusStops(){
 function searchNearby(item, index){
     var service = new google.maps.places.PlacesService(globalMap);
     console.log("Generating bus stop from " +  new google.maps.LatLng(item.lat, item.lng) + " index: " + index);
-    service.nearbySearch({
+    var request = {
         location: new google.maps.LatLng(item.lat, item.lng),
         radius: 500,
-        type: ['bus_stop']
-    },nearbySearchCallback)
+        type: ['bus_station']
+    };
+    service.nearbySearch(request,nearbySearchCallback)
 }
 
 function nearbySearchCallback(results, status){
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-        console.log("Generation bus stop location" + results[1].geometry.location);
+        console.log("Generation bus stop location" + results[0].geometry.location);
+        var lat = results[0].geometry.location.lat();
+        var lng = results[0].geometry.location.lng();
+        var locationPt = new google.maps.LatLng(lat, lng); //TODO: cannot create this object properly
+
         busStops.push({
-            location: results[1].geometry.location,   //todo: why results[1]? Also: it generates close, but weird locations, make it better
+            location: locationPt,
             stopover: true
         });
     }
@@ -37,7 +43,7 @@ function nearbySearchCallback(results, status){
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     var originAndDestination = "Jana Roso³a 10, Warszawa";
-    console.log(busStops);
+
     directionsService.route({
         origin: originAndDestination,
         destination: originAndDestination,
